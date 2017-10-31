@@ -1,0 +1,65 @@
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        {% if paging.page !=1 %}
+            <li>
+                <a href="{{url}}?page={{paging.page-1}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% else %}
+            <li>
+                <a href=" " > 没有上一页了 </a>
+            </li>
+        {% endif %}
+        {% if paging.pages >7 %}<!--总页数大于7-->
+            {% if paging.page > paging.pages-4 %}<!--当前页大于一半页数-->
+                {% for p in pageList %}<!--循环6次-->
+                    {% if paging.page == p %}
+                    <li class="active"><a href="{{url}}?page={{p}}">{{p}}</a></li>
+                    {%  else %}<!--显示最后一页-->
+                    <li class=""><a href="{{url}}?page={{p+3}}">{{p+3}}</a></li>
+                    {% endif %}
+
+                {% endfor %}
+                <li class=""><a href="javascript:void(0)">...</a></li>
+                <li class=""><a href="{{url}}?page={{paging.pages}}">{{paging.pages}}</a></li>
+            {% else %}
+
+                <li class=""><a href="{{url}}?page=1">1</a></li>
+                 <li class=""><a href="javascript:void(0)">...</a></li>
+                {% for p in pageList %}<!--循环6次-->
+                    {% if paging.page == p %}
+                    <li class="active"><a href="{{url}}?page={{p}}">{{p}}</a></li>
+                    {%  else %}<!--显示最后一页-->
+                    <li class=""><a href="{{url}}?page={{p+3}}">{{p+3}}</a></li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% else %}<!--总页数小于等于7-->
+                {% for p in pageList2 %}<!--循环具体页数-->
+                        {% if paging.page == p %}
+                            <li class="active"><a href="{{url}}?page={{p}}">{{p}}</a></li>
+                        {%  else %}
+                            <li class=""><a href="{{url}}?page={{p}}">{{p}}</a></li>
+                        {% endif %}
+                {% endfor %}
+        {% endif %}
+
+        {% if paging.page != paging.pages %}
+            <li>
+                <a href="{{url}}?page={{paging.page+1}}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        {% else %}
+            <li>
+                <a href=" " > 没有下一页了 </a>
+            </li>
+        {% endif %}
+    </ul>
+    <ul>
+        <li>总页数：{{paging.pages}}   </li>
+        <li>共{{paging.count}}条</li>
+    </ul>
+
+</nav>

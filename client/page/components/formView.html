@@ -1,0 +1,32 @@
+<!--<div class='search-content'>-->
+	<form   novalidate id="defaultForm" method="post" ng-click="formValidator()"   name='{{formView.name}}' class="{{formView.cla}}">
+	  <div class="form-group" ng-repeat="v in formView.sonC">
+	    <label  class="control-label">{{v.title}}</label>
+	    <input  class="col-sm-10" ng-if="v.type=='text'" type="text"  ng-model='v.value' class="form-control" name="{{v.name}}" >
+		<input ng-if="v.type=='password'" type="password"  ng-model='v.value' class="form-control" name="{{v.name}}" >
+	    <input  ng-if="v.type=='timepicker'" type="text" ng-model='v.value' class="form-control common_datetimepicker" ng-init="datetimepicker()"  name="{{v.name}}">
+		 
+		<select ng-if="v.type=='select'" class="form-control" ng-model='v.value'>
+			<option value=""></option>
+			<option ng-repeat='c in v.content' value='{{c.value}}'>{{c.text}}</option>
+		</select>
+		
+		
+		<div class="  form-control-list" ng-if='v.type=="checkbox"'>
+			 
+			<label class="checkbox checkbox-inline" ng-repeat='checkbox in v.content'>
+			  <input type="checkbox"  name='{{v.name}}' value="{{checkbox.value}}" ng-checked='{{checkbox.checked}}'> {{checkbox.value}}
+			</label>
+		 
+		</div>
+		<div class=" form-control-list" ng-if='v.type=="radio"'>
+			<label class=" radio radio-inline" ng-repeat='r in v.content'>
+			  <input type="radio" name="{{v.name}}"  value="{{r.value}}" ng-checked="{{r.checked}}"> {{r.value}}
+			</label>
+		</div>
+	  </div>
+	   <button  id='sub' class="btn btn-primary" ng-click="submitFun()">Submit</button>
+	<!--  <button type="button"  class="btn btn-default btn-primary" >submit</button>-->
+	</form>
+<!--</div>-->
+

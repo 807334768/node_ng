@@ -1,0 +1,128 @@
+
+
+{% extends './layout.html' %}
+{% block main%}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+          <button type="button" class="btn btn-default ">
+              <span class="glyphicon glyphicon-search" aria-hidden="true"></span> search
+          </button>
+      </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+            {% for content in contents %}
+            <div class="blog-post">
+                <h2 class="blog-post-title">{{content.title}}</h2>
+                <p class="blog-post-meta">
+                    {{content.addTime|date('Y-m-d H:i:s',-8*60)}}
+                    by {{content.user.username}}&nbsp;&nbsp;
+                阅读量：{{content.views}} &nbsp;&nbsp;
+                评论数：10 &nbsp;&nbsp;
+                <a>分类：{{content.category.name}}</a>
+                </p>
+
+                <p>{{content.description}}</p>
+                <!--<p>{{content.content}}</p>-->
+                <div class="'function"><a href="/views?contentid={{content._id.toString()}}">阅读全文</a></div>
+            </div><!-- /.blog-post -->
+            {%endfor%}
+            <nav aria-label="Page navigation"><!--page navigation -->
+                <ul class="pagination">
+                  {% if page <=1 %}
+                    <li>
+                        <a >
+                            没有上一页了
+                        </a>
+                    </li>
+                  {% else%}
+                    <li>
+                        <a href="{{url}}?category={{categoryId}}&page={{page-1}}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                  {% endif %}
+                    <li><a>{{page}}/{{pages}}</a></li>
+                    {% if page >=pages %}
+                    <li>
+                        <a >
+                            没有下一页了
+                        </a>
+                    </li>
+                    {% else%}
+                    <li>
+                        <a href="{{url}}?category={{categoryId}}&page={{page+1}}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav><!-- /.page navigation -->
+
+
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 offset-sm-1 blog-sidebar">
+            <div class="sidebar-module sidebar-module-inset">
+                {% if userInfo._id %}
+                <div id="userInfo" class="panel panel-default">
+                    <div class="panel-heading">用户信息 <a id="longout" href="javascript:void(0)">【退出】</a> </div>
+                    <div class="panel-body">
+                        {% if userInfo.isAdmin %}
+                        欢迎：管理员！<span id="name">{{userInfo.username}}</span>！
+                        <a href="/admin">进入管理</a>
+                        {% else %}
+                        欢迎：<span id="name">{{userInfo.username}}</span>！
+                        {% endif %}
+
+                    </div>
+
+                </div>
+                {% else %}
+                <form class="form-signin">
+                    <div id="sign">
+                        <h2 class="form-signin-heading">登录</h2>
+                        <div id="error_sign"></div>
+                        <label for="inputEmail" class="sr-only">Email address</label>
+                        <input type="email" id="inputEmail" name="username" class="form-control" placeholder="Email address" required autofocus>
+                        <label for="inputPassword" name="password" class="sr-only">Password</label>
+                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        <button class="btn btn-lg btn-primary btn-block" type="button" id="signBtn">Sign in</button>
+                        <a id="toRegister">注册</a>
+                        <a id="thirdParty">
+                            <span id="qq">qq</span>
+                            <span id="weibo">微博</span>
+                            <span id="wx">微信</span>
+                        </a>
+                    </div>
+                </form>
+
+                <form class="form-signin ">
+                    <div id="register" class="displayNone">
+                        <h2 class="form-signin-heading">注册</h2>
+                        <div id="error_reg"></div>
+                        <input type="email" id="regName" name="username" class="form-control" placeholder="Email address" required autofocus>
+                        <input type="password" id="regPassword" class="form-control" placeholder="Password" required>
+                        <input type="password" id="regRepassword" class="form-control" placeholder="repassword" required>
+                        <button class="btn btn-lg btn-primary btn-block" type="button" id="registerBtn">register</button>
+                        <a id="toSign">登录</a>
+                    </div>
+                </form>
+                {% endif%}
+
+            </div>
+
+        </div><!-- /.blog-sidebar -->
+
+    </div><!-- /.row -->
+
+</div><!-- /.container -->
+
+{% endblock%}

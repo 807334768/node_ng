@@ -1,0 +1,74 @@
+{% extends './layout.html' %}
+{% block main%}
+<div class="container">
+    <div class="jumbotron">
+        <h2>{{content.title}}</h2>
+        <h6>
+            {{content.addTime|date('Y-m-d H:i:s',-8*60)}}
+            by {{content.user.username}}&nbsp;&nbsp;
+            阅读量：{{content.views}} &nbsp;&nbsp;
+            评论数：10 &nbsp;&nbsp;
+            <a>分类：{{content.category.name}}</a>
+        </h6>
+        <p>{{content.content}}</p>
+    </div>
+</div>
+        <div class="container mt20">
+            {% if userInfo._id %}
+            <p><h4>评论</h4><h6>共有<span id="countList"></span>  条评论</h6></p>
+            <form class="form-inline">
+                <input type="hidden"  id="contentId" value="{{content._id.toString()}}"/>
+                <div class="form-group">
+                    <label for="content" class="sr-only">评论</label>
+                    <textarea name="" id="content" cols="100" rows="5"></textarea>
+                </div>
+                <button type="submit" id="sub_content" class="btn btn-default">提交</button>
+            </form>
+
+                {% if content.comments %}
+                <div id="comments">
+                    {% for c in content.comments %}
+                    <div class="media">
+                    <div class="media-left media-middle">
+                        <a href="#">
+                            <img class="media-object" src="/server/public/public/images/123.jpg">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                       <div>{{c.content}} </div>
+                        <h5 class="media-heading">{{c.username}}&nbsp;&nbsp;{{c.postTime|date('Y-m-d H:i:s',-8*60)}}</h5>
+                    </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>上一页
+                            </a>
+                        </li>
+                        <li><a></a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                下一页    <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                {% else %}
+                    <div class="alert alert-info" role="alert">暂无评论</div>
+                {% endif %}
+
+            {% else %}
+            <div class="alert alert-danger" role="alert">注册用户登录后才能发表评论，请 登录 或 注册，访问网站首页。</div>
+            {% endif %}
+        </div>
+
+{% endblock %}
+
+{%block viewjs%}
+{% if userInfo._id %}
+<script src="../public/js/view.js"></script>
+{% endif %}
+{%endblock%}

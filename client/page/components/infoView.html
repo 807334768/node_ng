@@ -1,0 +1,20 @@
+<!--
+<div class="list-group" ng-repeat='info in infoV'>
+  <a href="javascript:void(0)" class="list-group-item active">
+   {{info.title}}
+  </a>
+  <a href="javascript:void(0)" ng-repeat='list in info.infoList'  class="list-group-item">
+  	{{list.name}}:{{list.content}}
+  </a>
+</div>-->
+<div class="list-group" >
+    <a href="javascript:void(0)" class="list-group-item active">
+      管理员信息
+    </a>
+    <a href="javascript:void(0)"  class="list-group-item">
+      登录名：  {{infoV.username}}
+    </a>
+    <a href="javascript:void(0)"  class="list-group-item">
+      密码：  {{infoV.password}}
+    </a>
+</div>

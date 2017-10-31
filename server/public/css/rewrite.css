@@ -1,0 +1,22 @@
+button, input, optgroup, select, textarea{
+    margin: 5px;
+}
+.jumbotron,.container{
+    background:white;
+}
+.container{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+body{
+    background:#f5f7f9;
+}
+.media-object{
+    width:60px;
+    border-radius: 50%;
+}
+.h5, h5 {
+    font-size: 14px;
+    text-align: right;
+    color: #aeabab;
+}

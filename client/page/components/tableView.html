@@ -1,0 +1,20 @@
+<div class="table-responsive">
+<table class="table table-hover table-condensed table-striped ">
+	<thead>
+		<tr class='info'>
+			<td  ng-repeat="(key, value) in tableV.head  track by $index">{{value}}</td>
+		</tr>
+	</thead>
+	<tbody >
+	
+		<tr ng-class="{even:'warning',odd:'success'}"  ng-repeat="(key, value) in tableV.body">
+			<td  ng-repeat="k in value track by $index">{{k}}</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div ng-if="paginationConf!=undefined">
+	<pagination   conf=paginationConf></pagination>
+</div>
+

@@ -1,0 +1,27 @@
+<!--<div class="container dataCountContainer" >
+		   <highchart class="chart-container-big"  series="ch.charts.series" options="ch.charts.options">
+		    </highchart>
+</div>-->
+<!--<div ng-repeat="(c,type) in vm">
+	{{c}}{{type}}
+
+</div>-->
+<div class="row">
+	<div class="col-xs-12 col-md-1 "><input type="button" class="btn btn-primary" value="导出excel" ng-click="lineExcel()"/></div>
+</div>
+<div class="row">
+
+	<div class="col-xs-12 col-md-3 ">交易时间：{{start}}至{{end}}</div>
+	<div class="col-xs-12 col-md-2">总交易笔数：{{sunNum}}笔</div>
+	<div class="col-xs-12 col-md-2">总交易金额：{{sumMoney}}元</div>
+
+</div>
+
+<div class="contentH">
+<highchart class='highcharts' title='vm.line.title' series="vm.line.series" options="vm.line.options">
+ </highchart>
+</div>
+<div class="contentH">
+<highchart  class='highcharts'   ng-show="realTime" title='vm.realline.title' series="vm.realline.series" options="vm.realline.options">
+</highchart>
+</div>

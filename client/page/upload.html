@@ -1,0 +1,21 @@
+<div class='shadow-container overflow'  ng-controller='registerCtrl'>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-xs-12">
+         <!--   <div ui-view='formView'></div>-->
+            <form id="uploadFileForm" method="post" enctype="multipart/form-data" >
+                <input type="button" class="btn btn-primary" id="btnForFile"   ng-click="forFile()" value="文件上传"/>
+                <input type="file" id="file"  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onchange="angular.element(this).scope().fileChange()">
+                <input type="button"  class="btn btn-primary btn-display-block" ng-click="uploadFile()" value="提交" >
+            </form>
+            <!--<div ui-view='tableView'></div>-->
+
+            <a href="{{downFileUrl}}{{list.fileName}}" class="fileList" ng-repeat="list in fileData">
+                {{list.fileName}}
+
+            </a>
+
+
+
+        </div>
+    </div>
+</div>

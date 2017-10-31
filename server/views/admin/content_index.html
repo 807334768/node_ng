@@ -1,0 +1,70 @@
+
+{% extends './layout.html' %}
+{% block main%}
+
+<ol class="breadcrumb">
+    <li><a href="/admin">管理首页</a></li>
+    <li><a href="#"><span>内容列表</span></a></li>
+</ol>
+<h3>内容列表</h3>
+
+<table class="table table-hover table-striped">
+    <tr>
+        <th>行号</th>
+       <th>id</th>
+        <th>分类名称</th>
+        <th>标题</th>
+        <th>作者</th>
+        <th>添加时间</th>
+        <th>阅读量</th>
+        <th>操作</th>
+    </tr>
+    {% for content in content %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{content._id.toString()}}</td>
+            <td>{{content.category.name}}</td>
+            <td>{{content.title}}</td>
+            <td>{{content.user.username}}</td>
+            <td>{{content.addTime|date('Y-m-d H:i:s',-8*60)}}</td>
+            <td>{{content.views}}</td>
+            <td>
+                <a class="operation" href="javascript:void(0)" data-id="{{content._id.toString()}}">修改</a>|
+                <a class="operation_delete" href="javascript:void(0)" data-id="{{content._id.toString()}}">删除</a>
+            </td>
+        </tr>
+    {% endfor%}
+</table>
+{%include "page.html"%}
+<div class="cover"></div>
+<div class="dialog">
+    <div class="col-xs-6">
+        <form role="form" >
+            <input type="hidden" id="_id" />
+            <div class="form-group">
+                <label for="category">分类名称</label>
+                <select class="form-control" name="categories" id="category">
+                    <option value=""></option>
+                    {% for category in category %}
+                    <option value="{{category.id}}">{{category.name}}</option>
+                    {% endfor%}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="title">标题</label>
+                <input type="text"  class="form-control" name="title" id="title"/>
+            </div>
+            <div class="form-group">
+                <label for="description">简介</label>
+                <textarea class="form-control" name="description" id="description" ></textarea>
+            </div>
+            <div class="form-group">
+                <label for="content">内容</label>
+                <textarea class="form-control" name="content" id="content"  rows="10"></textarea>
+            </div>
+        </form>
+        <button id="edit_update" class="btn btn-default">提交</button>
+    </div>
+</div>
+
+{% endblock%}
